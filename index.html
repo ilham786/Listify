@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="0;url=welcome.html">
+  <title>Redirecting...</title>
+</head>
+<body>
+  <p>Redirecting to welcome page...</p>
+</body>
+</html>
+      --text-secondary: #b3b3b3;
+      --accent: #7289da;
+      --accent-hover: #5b6eae;
+      --border: #404040;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      background: var(--bg-secondary);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      color: var(--text-primary);
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2.2em;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 12px 15px;
+      font-size: 16px;
+      background: var(--bg-primary);
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(114, 137, 218, 0.2);
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 16px;
+      background: var(--accent);
+      color: var(--text-primary);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+
+    button:hover {
+      background: var(--accent-hover);
+    }
+
+    button.reset {
+      background: #dc3545;
+    }
+
+    button.reset:hover {
+      background: #bb2d3b;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    ol {
+      list-style-position: inside;
+      padding: 0;
+    }
+
+    li {
+      margin: 12px 0;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: var(--bg-primary);
+      border-radius: 8px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      accent-color: var(--accent);
+    }
+
+    .purchased {
+      text-decoration: line-through;
+      color: var(--text-secondary);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    ::placeholder {
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🛒 Shopping List</h1>
+    <div class="input-group">
+      <input type="text" id="itemInput" placeholder="Enter what you want to buy...">
+      <div class="btn-group">
+        <button onclick="addItem()">Add Item</button>
+        <button class="reset" onclick="resetList()">Reset List</button>
+      </div>
+    </div>
+    <ol id="list"></ol>
+  </div>
+
+  <script>
+    function addItem() {
+      const input = document.getElementById("itemInput");
+      const itemText = input.value.trim();
+      if (itemText === "") return;
+
+      const list = document.getElementById("list");
+      const li = document.createElement("li");
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.onchange = function() {
+        if (this.checked) {
+          li.classList.add("purchased");
+        } else {
+          li.classList.remove("purchased");
+        }
+      };
+
+      const textSpan = document.createElement("span");
+      textSpan.textContent = itemText;
+
+      li.appendChild(checkbox);
+      li.appendChild(textSpan);
+      list.appendChild(li);
+
+      input.value = "";
+      input.focus();
+    }
+
+    // Allow pressing Enter to add item
+    document.getElementById("itemInput").addEventListener("keypress", function(e) {
+      if (e.key === "Enter") {
+        addItem();
+      }
+    });
+
+    // Function to reset the list
+    function resetList() {
+      const list = document.getElementById("list");
+      // Add fade-out animation to items
+      const items = list.getElementsByTagName("li");
+      Array.from(items).forEach(item => {
+        item.style.animation = "fadeIn 0.3s ease reverse";
+      });
+      // Clear the list after animation
+      setTimeout(() => {
+        list.innerHTML = "";
+      }, 300);
+    }
+  </script>
+</body>
+</html>
