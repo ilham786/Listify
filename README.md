@@ -1,4 +1,4 @@
-# 🛒 ShopMate - Modern Shopping List
+# 🛒 Your ShopMate Listify - Modern Shopping List
 
 A sleek and user-friendly shopping list application designed to help you organize your grocery trips efficiently. Built with a focus on UI/UX, it features a default dark theme with a toggleable light mode.
 
