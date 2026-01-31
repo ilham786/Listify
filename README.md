@@ -22,3 +22,6 @@ A sleek and user-friendly shopping list application designed to help you organiz
 1.  Clone the repository.
 2.  Open `index.html` in your web browser.
 3.  You will be redirected to the Welcome page to start your list.
+
+                    This project is under development 
+                    I will work on this when I will get time
